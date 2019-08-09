@@ -13,10 +13,11 @@ const type_graphql_1 = require("type-graphql");
 const graphql_yoga_1 = require("graphql-yoga");
 const project_resolver_1 = require("./resolvers/project-resolver");
 const task_resolver_1 = require("./resolvers/task-resolver");
+const note_resolver_1 = require("./resolvers/note-resolver");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const schema = yield type_graphql_1.buildSchema({
-            resolvers: [project_resolver_1.default, task_resolver_1.default],
+            resolvers: [project_resolver_1.default, task_resolver_1.default, note_resolver_1.default],
             emitSchemaFile: true,
         });
         const server = new graphql_yoga_1.GraphQLServer({

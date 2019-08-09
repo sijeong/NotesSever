@@ -5,6 +5,13 @@
 
 type Mutation {
   markAsCompleted(taskId: Float!): Task!
+  editContent: Note!
+}
+
+type Note {
+  id: String!
+  title: String!
+  content: String!
 }
 
 type Project {
@@ -17,6 +24,8 @@ type Query {
   projectByName(name: String!): Project
   fetchTasks: [Task!]!
   getTask(id: Float!): Task
+  fetchNotes: [Note!]!
+  getNote(id: String!): Note
 }
 
 type Task {

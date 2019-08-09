@@ -4,10 +4,11 @@ import { buildSchema } from "type-graphql";
 import { GraphQLServer } from "graphql-yoga";
 import projectResolver from "./resolvers/project-resolver";
 import taskResolver from "./resolvers/task-resolver";
+import noteResolver from "./resolvers/note-resolver";
 
 async function bootstrap() {
     const schema = await buildSchema({
-        resolvers: [projectResolver, taskResolver],
+        resolvers: [projectResolver, taskResolver, noteResolver],
         emitSchemaFile: true,
     });
 

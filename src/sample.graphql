@@ -1,0 +1,18 @@
+# fetch all tasks
+
+{
+  fetchTasks {
+    title
+    project {
+      name
+    }
+  }
+}
+
+#fetch all notes
+{
+    fetchNotes{
+        title
+        content
+    }
+}

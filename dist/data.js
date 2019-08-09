@@ -11,4 +11,9 @@ exports.tasks = [
     { id: 4, title: "Morning Jog", completed: true, project_id: 2 },
     { id: 5, title: "Visit the gym", completed: false, project_id: 2 }
 ];
+exports.notes = [
+    { id: "a000001", title: "Monday", content: "" },
+    { id: "a000002", title: "Wednesday", content: "Rose" },
+    { id: "a000003", title: "Friday", content: "" },
+];
 //# sourceMappingURL=data.js.map
