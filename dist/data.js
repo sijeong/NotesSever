@@ -16,4 +16,9 @@ exports.notes = [
     { id: "a000002", title: "Wednesday", content: "Rose" },
     { id: "a000003", title: "Friday", content: "" },
 ];
+exports.products = [
+    { id: "a000001", name: "Monday", image_url: "" },
+    { id: "a000002", name: "Wednesday", image_url: "Rose" },
+    { id: "a000003", name: "Friday", image_url: "" },
+];
 //# sourceMappingURL=data.js.map

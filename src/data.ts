@@ -1,3 +1,5 @@
+import { Product } from "schema-ts";
+
 export interface ProjectData {
     id: number;
     name: string;
@@ -33,4 +35,10 @@ export const notes: NoteData[] = [
     {id: "a000001", title: "Monday", content: ""},
     {id: "a000002", title: "Wednesday", content: "Rose"},
     {id: "a000003", title: "Friday", content: ""},
+]
+
+export const products: Product[] = [
+    {id: "a000001", name: "Monday", image_url: ""},
+    {id: "a000002", name: "Wednesday", image_url: "Rose"},
+    {id: "a000003", name: "Friday", image_url: ""},
 ]

@@ -10,13 +10,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/uuid": "^3.4.5",
     "@types/ws": "^6.0.2",
     "graphql-yoga": "^1.18.1",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.17.4"
+    "schema-ts": "git+https://github.com/sijeong/schema-typescript.git",
+    "type-graphql": "^0.17.4",
+    "typeorm": "^0.2.18",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.5.0",
     "@types/node": "^12.7.1",
+    "graphql": "^14.4.2",
     "typescript": "^3.5.3"
   }
 }

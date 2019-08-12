@@ -5,10 +5,11 @@ import { GraphQLServer } from "graphql-yoga";
 import projectResolver from "./resolvers/project-resolver";
 import taskResolver from "./resolvers/task-resolver";
 import noteResolver from "./resolvers/note-resolver";
+import productResolver from "./resolvers/product-resolver";
 
 async function bootstrap() {
     const schema = await buildSchema({
-        resolvers: [projectResolver, taskResolver, noteResolver],
+        resolvers: [projectResolver, taskResolver, noteResolver, productResolver],
         emitSchemaFile: true,
     });
 

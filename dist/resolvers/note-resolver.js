@@ -16,7 +16,7 @@ const data_1 = require("../data");
 const type_graphql_1 = require("type-graphql");
 const note_1 = require("../schemas/note");
 let default_1 = class default_1 {
-    fetchNotes() {
+    notes() {
         return data_1.notes;
     }
     getNote(id) {
@@ -37,7 +37,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Array)
-], default_1.prototype, "fetchNotes", null);
+], default_1.prototype, "notes", null);
 __decorate([
     type_graphql_1.Query(returns => note_1.default, { nullable: true }),
     __param(0, type_graphql_1.Arg("id")),

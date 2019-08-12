@@ -5,7 +5,7 @@ import Note from "../schemas/note";
 @Resolver(of => Note)
 export default class {
     @Query(returns => [Note])
-    fetchNotes(): NoteData[] {
+    notes(): NoteData[] {
         return notes;
     }
     @Query(returns => Note, { nullable: true })
@@ -24,4 +24,5 @@ export default class {
 
         return note;
     }
+    
 }
