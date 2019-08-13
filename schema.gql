@@ -14,10 +14,6 @@ type Note {
   content: String!
 }
 
-type Product {
-  name: String!
-}
-
 type Project {
   id: Int!
   name: String!
@@ -26,11 +22,10 @@ type Project {
 
 type Query {
   projectByName(name: String!): Project
-  fetchTasks: [Task!]!
+  tasks: [Task!]!
   getTask(id: Float!): Task
   notes: [Note!]!
   getNote(id: String!): Note
-  products: [Product!]!
 }
 
 type Task {

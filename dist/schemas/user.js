@@ -8,32 +8,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const project_1 = __importDefault(require("./project"));
+const typeorm_1 = require("typeorm");
 const type_graphql_1 = require("type-graphql");
-let Task = class Task {
+let User = class User {
 };
 __decorate([
-    type_graphql_1.Field(type => type_graphql_1.Int),
+    type_graphql_1.Field(type => type_graphql_1.ID),
+    typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Task.prototype, "id", void 0);
+], User.prototype, "id", void 0);
 __decorate([
     type_graphql_1.Field(),
+    typeorm_1.Column(),
     __metadata("design:type", String)
-], Task.prototype, "title", void 0);
+], User.prototype, "email", void 0);
 __decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", Boolean)
-], Task.prototype, "completed", void 0);
+    type_graphql_1.Field({ nullable: true }),
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "namename", void 0);
 __decorate([
-    type_graphql_1.Field(type => project_1.default),
-    __metadata("design:type", project_1.default)
-], Task.prototype, "project", void 0);
-Task = __decorate([
-    type_graphql_1.ObjectType()
-], Task);
-exports.default = Task;
-//# sourceMappingURL=task.js.map
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+User = __decorate([
+    type_graphql_1.ObjectType(),
+    typeorm_1.Entity()
+], User);
+exports.User = User;
+//# sourceMappingURL=user.js.map

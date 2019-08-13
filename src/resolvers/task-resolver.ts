@@ -1,12 +1,20 @@
 import { TaskData, tasks, projects } from "../data";
 import { Resolver, Query, Arg, Mutation, FieldResolver, Root } from "type-graphql";
 import Task from "../schemas/task";
+import { InjectRepository } from "typeorm-typedi-extensions";
+import { Repository } from "typeorm";
+import Project from "../schemas/project";
 
 @Resolver(of => Task)
 export default class {
+    constructor(
+        @InjectRepository(Task) private readonly taskRepository: Repository<Task>,
+        @InjectRepository(Project) private readonly projectRepository: Repository<Project>
+    ) { }
+
     @Query(returns => [Task])
-    fetchTasks(): TaskData[] {
-        return tasks;
+    tasks(): Promise<Task[]> {
+        return this.taskRepository.find();
     }
 
     @Query(returns => Task, { nullable: true })

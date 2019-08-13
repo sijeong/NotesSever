@@ -8,24 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
-const task_1 = require("./task");
+const task_1 = __importDefault(require("./task"));
+const typeorm_1 = require("typeorm");
 let Project = class Project {
 };
 __decorate([
     type_graphql_1.Field(type => type_graphql_1.Int),
+    typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
 ], Project.prototype, "id", void 0);
 __decorate([
     type_graphql_1.Field(),
+    typeorm_1.Column(),
     __metadata("design:type", String)
 ], Project.prototype, "name", void 0);
 __decorate([
     type_graphql_1.Field(type => [task_1.default]),
+    typeorm_1.Column(),
     __metadata("design:type", Array)
 ], Project.prototype, "tasks", void 0);
 Project = __decorate([
+    typeorm_1.Entity(),
     type_graphql_1.ObjectType()
 ], Project);
 exports.default = Project;

@@ -21,4 +21,18 @@ exports.products = [
     { id: "a000002", name: "Wednesday", image_url: "Rose" },
     { id: "a000003", name: "Friday", image_url: "" },
 ];
+exports.reviews = [
+    {
+        id: "",
+        title: "",
+        content: "",
+        rating: 5,
+        product_id: "",
+    }
+];
+exports.prices = [
+    {
+        dc_rate: 10, final_price: 20, product_id: "1"
+    }
+];
 //# sourceMappingURL=data.js.map

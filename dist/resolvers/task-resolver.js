@@ -11,13 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const data_1 = require("../data");
 const type_graphql_1 = require("type-graphql");
-const task_1 = require("../schemas/task");
+const task_1 = __importDefault(require("../schemas/task"));
+const typeorm_typedi_extensions_1 = require("typeorm-typedi-extensions");
+const typeorm_1 = require("typeorm");
+const project_1 = __importDefault(require("../schemas/project"));
 let default_1 = class default_1 {
-    fetchTasks() {
-        return data_1.tasks;
+    constructor(taskRepository, projectRepository) {
+        this.taskRepository = taskRepository;
+        this.projectRepository = projectRepository;
+    }
+    tasks() {
+        return this.taskRepository.find();
     }
     getTask(id) {
         return data_1.tasks.find(task => task.id === id);
@@ -45,8 +55,8 @@ __decorate([
     type_graphql_1.Query(returns => [task_1.default]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Array)
-], default_1.prototype, "fetchTasks", null);
+    __metadata("design:returntype", Promise)
+], default_1.prototype, "tasks", null);
 __decorate([
     type_graphql_1.Query(returns => task_1.default, { nullable: true }),
     __param(0, type_graphql_1.Arg("id")),
@@ -69,7 +79,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], default_1.prototype, "project", null);
 default_1 = __decorate([
-    type_graphql_1.Resolver(of => task_1.default)
+    type_graphql_1.Resolver(of => task_1.default),
+    __param(0, typeorm_typedi_extensions_1.InjectRepository(task_1.default)),
+    __param(1, typeorm_typedi_extensions_1.InjectRepository(project_1.default)),
+    __metadata("design:paramtypes", [typeorm_1.Repository,
+        typeorm_1.Repository])
 ], default_1);
 exports.default = default_1;
 //# sourceMappingURL=task-resolver.js.map

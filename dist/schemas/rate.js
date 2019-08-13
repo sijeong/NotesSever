@@ -8,32 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const project_1 = __importDefault(require("./project"));
 const type_graphql_1 = require("type-graphql");
-let Task = class Task {
+const typeorm_1 = require("typeorm");
+let Recipe = class Recipe {
 };
 __decorate([
-    type_graphql_1.Field(type => type_graphql_1.Int),
+    type_graphql_1.Field(),
+    typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Task.prototype, "id", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], Task.prototype, "title", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", Boolean)
-], Task.prototype, "completed", void 0);
-__decorate([
-    type_graphql_1.Field(type => project_1.default),
-    __metadata("design:type", project_1.default)
-], Task.prototype, "project", void 0);
-Task = __decorate([
+], Recipe.prototype, "id", void 0);
+Recipe = __decorate([
+    typeorm_1.Entity(),
     type_graphql_1.ObjectType()
-], Task);
-exports.default = Task;
-//# sourceMappingURL=task.js.map
+], Recipe);
+exports.Recipe = Recipe;
+//# sourceMappingURL=rate.js.map
