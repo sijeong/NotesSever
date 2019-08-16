@@ -52,6 +52,9 @@ function bootstrap() {
             const schema = yield TypeGraphQL.buildSchema({
                 resolvers: [recipe_resolver_1.RecipeResolver, rate_resolver_1.RateResolver],
                 container: typedi_1.Container,
+                emitSchemaFile: {
+                    path: 'emit.graphql'
+                }
             });
             // create mocked context
             const context = { user: defaultUser };

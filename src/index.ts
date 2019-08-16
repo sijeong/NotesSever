@@ -43,6 +43,9 @@ async function bootstrap() {
     const schema = await TypeGraphQL.buildSchema({
       resolvers: [RecipeResolver, RateResolver],
       container: Container,
+      emitSchemaFile: {
+          path: 'emit.graphql'
+      }
     });
 
     // create mocked context
