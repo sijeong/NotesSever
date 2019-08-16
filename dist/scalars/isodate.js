@@ -20,4 +20,3 @@ exports.GraphQLISODateTime = new graphql_1.GraphQLScalarType({
         return null;
     },
 });
-//# sourceMappingURL=isodate.js.map

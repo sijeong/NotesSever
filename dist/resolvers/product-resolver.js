@@ -59,4 +59,3 @@ default_1 = __decorate([
     __metadata("design:paramtypes", [typeorm_1.Repository])
 ], default_1);
 exports.default = default_1;
-//# sourceMappingURL=product-resolver.js.map

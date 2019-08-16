@@ -11,16 +11,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
-let Recipe = class Recipe {
+const user_1 = require("./user");
+const recipe_1 = require("./recipe");
+const helpers_1 = require("../helpers");
+let Rate = class Rate {
 };
 __decorate([
-    type_graphql_1.Field(),
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Recipe.prototype, "id", void 0);
-Recipe = __decorate([
+], Rate.prototype, "id", void 0);
+__decorate([
+    type_graphql_1.Field(type => type_graphql_1.Int),
+    typeorm_1.Column({ type: "int" }),
+    __metadata("design:type", Number)
+], Rate.prototype, "value", void 0);
+__decorate([
+    type_graphql_1.Field(type => user_1.User),
+    typeorm_1.ManyToOne(type => user_1.User),
+    __metadata("design:type", user_1.User)
+], Rate.prototype, "user", void 0);
+__decorate([
+    helpers_1.RelationColumn(),
+    __metadata("design:type", Number)
+], Rate.prototype, "userId", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.CreateDateColumn(),
+    __metadata("design:type", Date)
+], Rate.prototype, "date", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => recipe_1.Recipe),
+    __metadata("design:type", recipe_1.Recipe)
+], Rate.prototype, "recipe", void 0);
+__decorate([
+    helpers_1.RelationColumn(),
+    __metadata("design:type", Number)
+], Rate.prototype, "recipeId", void 0);
+Rate = __decorate([
     typeorm_1.Entity(),
     type_graphql_1.ObjectType()
-], Recipe);
-exports.Recipe = Recipe;
-//# sourceMappingURL=rate.js.map
+], Rate);
+exports.Rate = Rate;

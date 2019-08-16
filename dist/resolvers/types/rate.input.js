@@ -8,31 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const project_1 = __importDefault(require("./project"));
 const type_graphql_1 = require("type-graphql");
-let Task = class Task {
+let RateInput = class RateInput {
 };
+__decorate([
+    type_graphql_1.Field(type => type_graphql_1.ID),
+    __metadata("design:type", String)
+], RateInput.prototype, "recipeId", void 0);
 __decorate([
     type_graphql_1.Field(type => type_graphql_1.Int),
     __metadata("design:type", Number)
-], Task.prototype, "id", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], Task.prototype, "title", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", Boolean)
-], Task.prototype, "completed", void 0);
-__decorate([
-    type_graphql_1.Field(type => project_1.default),
-    __metadata("design:type", project_1.default)
-], Task.prototype, "project", void 0);
-Task = __decorate([
-    type_graphql_1.ObjectType()
-], Task);
-exports.default = Task;
+], RateInput.prototype, "value", void 0);
+RateInput = __decorate([
+    type_graphql_1.InputType()
+], RateInput);
+exports.RateInput = RateInput;

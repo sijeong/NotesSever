@@ -14,52 +14,52 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const apollo_server_1 = require("apollo-server");
 const typedi_1 = require("typedi");
 const TypeORM = __importStar(require("typeorm"));
-const type_graphql_1 = require("type-graphql");
-// import { GraphQLServer } from "graphql-yoga";
-const project_resolver_1 = __importDefault(require("./resolvers/project-resolver"));
-const task_resolver_1 = __importDefault(require("./resolvers/task-resolver"));
-const note_resolver_1 = __importDefault(require("./resolvers/note-resolver"));
-const helper_1 = require("./helper");
+const TypeGraphQL = __importStar(require("type-graphql"));
+const recipe_resolver_1 = require("./resolvers/recipe.resolver");
+const rate_resolver_1 = require("./resolvers/rate.resolver");
+const recipe_1 = require("./schemas/recipe");
+const rate_1 = require("./schemas/rate");
+const user_1 = require("./schemas/user");
+const helpers_1 = require("./helpers");
+// register 3rd party IOC container
 TypeORM.useContainer(typedi_1.Container);
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // create TypeORM connection
             yield TypeORM.createConnection({
                 type: "postgres",
-                database: "type-graphql",
-                username: "",
-                password: "",
-                port: 1111,
+                database: "nbb",
+                username: "postgres",
+                password: "jsi9200!",
+                port: 5432,
                 host: "localhost",
-                entities: [],
+                entities: [recipe_1.Recipe, rate_1.Rate, user_1.User],
                 synchronize: true,
-                logger: "advanced-console",
-                logging: "all",
-                dropSchema: true,
-                cache: true,
+                // logger: "advanced-console",
+                logging: false
+                // dropSchema: true,
+                // cache: true,
             });
-            const { defaultVendor } = yield helper_1.seedDatabase();
-            const schema = yield type_graphql_1.buildSchema({
-                resolvers: [project_resolver_1.default, task_resolver_1.default, note_resolver_1.default],
+            // seed database with some data
+            const { defaultUser } = yield helpers_1.seedDatabase();
+            // build TypeGraphQL executable schema
+            const schema = yield TypeGraphQL.buildSchema({
+                resolvers: [recipe_resolver_1.RecipeResolver, rate_resolver_1.RateResolver],
                 container: typedi_1.Container,
-                emitSchemaFile: true,
             });
-            const context = { vendor: defaultVendor };
-            // const server = new GraphQLServer({
-            //     schema,
-            // });
+            // create mocked context
+            const context = { user: defaultUser };
+            // Create GraphQL server
             const server = new apollo_server_1.ApolloServer({ schema, context });
+            // Start the server
             const { url } = yield server.listen(4000);
             console.log(`Server is running, GraphQL Playground available at ${url}`);
-            // server.start(() => console.log("Server is running on http://localhost:4000"));
         }
         catch (err) {
             console.error(err);
@@ -67,4 +67,3 @@ function bootstrap() {
     });
 }
 bootstrap();
-//# sourceMappingURL=index.js.map

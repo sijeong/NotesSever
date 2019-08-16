@@ -35,4 +35,3 @@ exports.prices = [
         dc_rate: 10, final_price: 20, product_id: "1"
     }
 ];
-//# sourceMappingURL=data.js.map

@@ -58,4 +58,3 @@ default_1 = __decorate([
     type_graphql_1.Resolver(of => note_1.default)
 ], default_1);
 exports.default = default_1;
-//# sourceMappingURL=note-resolver.js.map

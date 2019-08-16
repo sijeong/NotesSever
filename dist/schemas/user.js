@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = require("typeorm");
 const type_graphql_1 = require("type-graphql");
+const typeorm_1 = require("typeorm");
 let User = class User {
 };
 __decorate([
@@ -27,7 +27,7 @@ __decorate([
     type_graphql_1.Field({ nullable: true }),
     typeorm_1.Column({ nullable: true }),
     __metadata("design:type", String)
-], User.prototype, "namename", void 0);
+], User.prototype, "nickname", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
@@ -37,4 +37,3 @@ User = __decorate([
     typeorm_1.Entity()
 ], User);
 exports.User = User;
-//# sourceMappingURL=user.js.map

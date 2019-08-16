@@ -28,4 +28,3 @@ Note = __decorate([
     type_graphql_1.ObjectType()
 ], Note);
 exports.default = Note;
-//# sourceMappingURL=note.js.map
