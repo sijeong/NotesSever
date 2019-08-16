@@ -22,7 +22,7 @@ export class RecipeResolver {
     }
 
     @Query(returns => [Recipe])
-    RecipeResolver(): Promise<Recipe[]> {
+    recipes(): Promise<Recipe[]> {
         return this.recipeRepository.find();
     }
 

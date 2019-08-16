@@ -37,7 +37,7 @@ let RecipeResolver = class RecipeResolver {
     recipe(recipeId) {
         return this.recipeRepository.findOne(recipeId);
     }
-    RecipeResolver() {
+    recipes() {
         return this.recipeRepository.find();
     }
     addRecipe(RecipeInput, { user }) {
@@ -86,7 +86,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], RecipeResolver.prototype, "RecipeResolver", null);
+], RecipeResolver.prototype, "recipes", null);
 __decorate([
     type_graphql_1.Mutation(returns => recipe_1.Recipe),
     __param(0, type_graphql_1.Arg("recipe")),
