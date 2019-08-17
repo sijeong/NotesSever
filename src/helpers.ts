@@ -3,11 +3,13 @@ import { getRepository, Column, ColumnOptions } from "typeorm";
 import { Recipe } from "./schemas/recipe";
 import { Rate } from "./schemas/rate";
 import { User } from "./schemas/user";
+import { Mall } from "./schemas/appsync/mall";
 
 export async function seedDatabase() {
   const recipeRepository = getRepository(Recipe);
   const ratingsRepository = getRepository(Rate);
   const userRepository = getRepository(User);
+  const mallRepository = getRepository(Mall);
 
   const defaultUser = userRepository.create({
     email: "test@github.com",
@@ -38,8 +40,17 @@ export async function seedDatabase() {
       ]),
     },
   ]);
+
   await recipeRepository.save(recipes);
 
+  const malls = mallRepository.create({
+    mallName: "Our First Mall",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  })
+
+  await mallRepository.save(malls);
+  
   return {
     defaultUser,
   };

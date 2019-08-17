@@ -26,6 +26,8 @@ const recipe_1 = require("./schemas/recipe");
 const rate_1 = require("./schemas/rate");
 const user_1 = require("./schemas/user");
 const helpers_1 = require("./helpers");
+const mall_resolver_1 = require("./resolvers/appsync/mall.resolver");
+const mall_1 = require("./schemas/appsync/mall");
 // register 3rd party IOC container
 TypeORM.useContainer(typedi_1.Container);
 function bootstrap() {
@@ -39,7 +41,7 @@ function bootstrap() {
                 password: "jsi9200!",
                 port: 5432,
                 host: "localhost",
-                entities: [recipe_1.Recipe, rate_1.Rate, user_1.User],
+                entities: [recipe_1.Recipe, rate_1.Rate, user_1.User, mall_1.Mall],
                 synchronize: true,
                 // logger: "advanced-console",
                 logging: false
@@ -50,7 +52,7 @@ function bootstrap() {
             const { defaultUser } = yield helpers_1.seedDatabase();
             // build TypeGraphQL executable schema
             const schema = yield TypeGraphQL.buildSchema({
-                resolvers: [recipe_resolver_1.RecipeResolver, rate_resolver_1.RateResolver],
+                resolvers: [recipe_resolver_1.RecipeResolver, rate_resolver_1.RateResolver, mall_resolver_1.MallResolver],
                 container: typedi_1.Container,
                 emitSchemaFile: {
                     path: 'emit.graphql'
@@ -59,7 +61,9 @@ function bootstrap() {
             // create mocked context
             const context = { user: defaultUser };
             // Create GraphQL server
-            const server = new apollo_server_1.ApolloServer({ schema, context });
+            // const server = new ApolloServer({ schema, context });
+            // Without context
+            const server = new apollo_server_1.ApolloServer({ schema });
             // Start the server
             const { url } = yield server.listen(4000);
             console.log(`Server is running, GraphQL Playground available at ${url}`);

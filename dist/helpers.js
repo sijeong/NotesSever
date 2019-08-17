@@ -12,11 +12,13 @@ const typeorm_1 = require("typeorm");
 const recipe_1 = require("./schemas/recipe");
 const rate_1 = require("./schemas/rate");
 const user_1 = require("./schemas/user");
+const mall_1 = require("./schemas/appsync/mall");
 function seedDatabase() {
     return __awaiter(this, void 0, void 0, function* () {
         const recipeRepository = typeorm_1.getRepository(recipe_1.Recipe);
         const ratingsRepository = typeorm_1.getRepository(rate_1.Rate);
         const userRepository = typeorm_1.getRepository(user_1.User);
+        const mallRepository = typeorm_1.getRepository(mall_1.Mall);
         const defaultUser = userRepository.create({
             email: "test@github.com",
             nickname: "19majkel94",
@@ -46,6 +48,12 @@ function seedDatabase() {
             },
         ]);
         yield recipeRepository.save(recipes);
+        const malls = mallRepository.create({
+            mallName: "Our First Mall",
+            createdAt: new Date(),
+            updatedAt: new Date()
+        });
+        yield mallRepository.save(malls);
         return {
             defaultUser,
         };

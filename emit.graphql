@@ -3,10 +3,20 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""...can be used for appsync scalar..."""
+scalar AWSDateTime
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
+
+type Mall {
+  mallId: ID!
+  mallName: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
 
 type Mutation {
   addRecipe(recipe: RecipeInput!): Recipe!
@@ -16,6 +26,7 @@ type Mutation {
 type Query {
   recipe(recipeId: Int!): Recipe
   recipes: [Recipe!]!
+  malls: [Mall!]!
 }
 
 type Rate {
