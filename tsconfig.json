@@ -13,7 +13,7 @@
         "strictPropertyInitialization": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "outDir": "./dist"
+        "outDir": "dist"
     },
     "include": [
         "./src/**/*"

@@ -15,11 +15,11 @@ export class Product {
     @PrimaryGeneratedColumn()
     productId: number;
 
-    @Field(type => Mall)
-    @ManyToOne(type => Mall)
-    mall: Mall;
-    @RelationColumn()
-    mallId: number;
+    // @Field(type => Mall)
+    // @ManyToOne(type => Mall)
+    // mall: Mall;
+    // @RelationColumn()
+    // mallId: number;
 
     @Field()
     @Column()
@@ -28,8 +28,8 @@ export class Product {
     status: ProductStatus;
 
     @Field(type => Supplier)
-    @ManyToMany(type => Supplier)
-    supplier: Supplier;
+    // @ManyToMany(type => Supplier)
+    // supplier: Supplier;
 
     @Field(type => ProductPrice)
     @Column(type => ProductPrice)

@@ -27,7 +27,6 @@ const rate_1 = require("./schemas/rate");
 const user_1 = require("./schemas/user");
 const helpers_1 = require("./helpers");
 const mall_resolver_1 = require("./resolvers/appsync/mall.resolver");
-const mall_1 = require("./schemas/appsync/mall");
 // register 3rd party IOC container
 TypeORM.useContainer(typedi_1.Container);
 function bootstrap() {
@@ -41,7 +40,7 @@ function bootstrap() {
                 password: "jsi9200!",
                 port: 5432,
                 host: "localhost",
-                entities: [recipe_1.Recipe, rate_1.Rate, user_1.User, mall_1.Mall],
+                entities: [recipe_1.Recipe, rate_1.Rate, user_1.User],
                 synchronize: true,
                 // logger: "advanced-console",
                 logging: false

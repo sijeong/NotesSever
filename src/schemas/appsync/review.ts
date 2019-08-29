@@ -15,18 +15,18 @@ export class Review {
 
     @Field(type => Mall)
     mall: Mall;
-    @RelationColumn()
-    mallId: number;
+    // @RelationColumn()
+    // mallId: number;
 
     @Field(type => Product)
     product: Product;
-    @RelationColumn()
-    productId: number;
+    // @RelationColumn()
+    // productId: number;
 
     @Field(type => Member)
     member: Member;
-    @RelationColumn()
-    memberId: number;
+    // @RelationColumn()
+    // memberId: number;
 
     @Field()
     @Column()

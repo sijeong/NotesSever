@@ -30,7 +30,7 @@ async function bootstrap() {
       password: "jsi9200!", // and password
       port: 5432,
       host: "localhost",
-      entities: [Recipe, Rate, User, Mall],
+      entities: [Recipe, Rate, User],
       synchronize: true,
       // logger: "advanced-console",
       logging: false

@@ -12,13 +12,18 @@ const typeorm_1 = require("typeorm");
 const recipe_1 = require("./schemas/recipe");
 const rate_1 = require("./schemas/rate");
 const user_1 = require("./schemas/user");
-const mall_1 = require("./schemas/appsync/mall");
+// import { Mall } from "./schemas/appsync/mall";
+// import { Supplier } from "./schemas/appsync/supplier";
+// import { Product } from "./schemas/appsync/product";
+// import { TaxType } from "./schemas/appsync/taxType.enum";
 function seedDatabase() {
     return __awaiter(this, void 0, void 0, function* () {
         const recipeRepository = typeorm_1.getRepository(recipe_1.Recipe);
         const ratingsRepository = typeorm_1.getRepository(rate_1.Rate);
         const userRepository = typeorm_1.getRepository(user_1.User);
-        const mallRepository = typeorm_1.getRepository(mall_1.Mall);
+        // const mallRepository = getRepository(Mall);
+        // const supplierRepository = getRepository(Supplier);
+        // const productRepository = getRepository(Product);
         const defaultUser = userRepository.create({
             email: "test@github.com",
             nickname: "19majkel94",
@@ -48,12 +53,26 @@ function seedDatabase() {
             },
         ]);
         yield recipeRepository.save(recipes);
-        const malls = mallRepository.create({
-            mallName: "Our First Mall",
-            createdAt: new Date(),
-            updatedAt: new Date()
-        });
-        yield mallRepository.save(malls);
+        // const defaultMall = mallRepository.create({
+        //   mallName: "Our First Mall",
+        //   createdAt: new Date(),
+        //   updatedAt: new Date()
+        // })
+        // await mallRepository.save(defaultMall);
+        // const defaultSupplier = supplierRepository.create({
+        // })
+        // const products = productRepository.create({
+        //   mall: defaultMall,
+        //   // supplier: defaultSupplier,
+        //   price:{
+        //     openMarketPrice: 1000,
+        //     purchasePrice: 1000,
+        //     memberPrice: 1000
+        //   },
+        //   taxType: TaxType.TAXABLE,
+        //   createdAt: new Date(),
+        //   updateAt: new Date()
+        // })
         return {
             defaultUser,
         };

@@ -14,7 +14,6 @@ const typeorm_1 = require("typeorm");
 const mall_1 = require("./mall");
 const AWSDateTime_1 = require("../../scalars/AWSDateTime");
 const AWSPhone_1 = require("../../scalars/AWSPhone");
-const helpers_1 = require("../../helpers");
 let Supplier = class Supplier {
 };
 __decorate([
@@ -27,10 +26,6 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", mall_1.Mall)
 ], Supplier.prototype, "mall", void 0);
-__decorate([
-    helpers_1.RelationColumn(),
-    __metadata("design:type", Number)
-], Supplier.prototype, "mallId", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column(),

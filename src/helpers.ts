@@ -3,18 +3,18 @@ import { getRepository, Column, ColumnOptions } from "typeorm";
 import { Recipe } from "./schemas/recipe";
 import { Rate } from "./schemas/rate";
 import { User } from "./schemas/user";
-import { Mall } from "./schemas/appsync/mall";
-import { Supplier } from "./schemas/appsync/supplier";
-import { Product } from "./schemas/appsync/product";
-import { TaxType } from "./schemas/appsync/taxType.enum";
+// import { Mall } from "./schemas/appsync/mall";
+// import { Supplier } from "./schemas/appsync/supplier";
+// import { Product } from "./schemas/appsync/product";
+// import { TaxType } from "./schemas/appsync/taxType.enum";
 
 export async function seedDatabase() {
   const recipeRepository = getRepository(Recipe);
   const ratingsRepository = getRepository(Rate);
   const userRepository = getRepository(User);
-  const mallRepository = getRepository(Mall);
-  const supplierRepository = getRepository(Supplier);
-  const productRepository = getRepository(Product);
+  // const mallRepository = getRepository(Mall);
+  // const supplierRepository = getRepository(Supplier);
+  // const productRepository = getRepository(Product);
 
   const defaultUser = userRepository.create({
     email: "test@github.com",
@@ -48,31 +48,31 @@ export async function seedDatabase() {
 
   await recipeRepository.save(recipes);
 
-  const defaultMall = mallRepository.create({
-    mallName: "Our First Mall",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  })
+  // const defaultMall = mallRepository.create({
+  //   mallName: "Our First Mall",
+  //   createdAt: new Date(),
+  //   updatedAt: new Date()
+  // })
 
-  await mallRepository.save(defaultMall);
+  // await mallRepository.save(defaultMall);
   
-  const defaultSupplier = supplierRepository.create({
+  // const defaultSupplier = supplierRepository.create({
 
-  })
+  // })
 
-  const products = productRepository.create({
+  // const products = productRepository.create({
     
-    mall: defaultMall,
-    supplier: defaultSupplier,
-    price:{
-      openMarketPrice: 1000,
-      purchasePrice: 1000,
-      memberPrice: 1000
-    },
-    taxType: TaxType.TAXABLE,
-    createdAt: new Date(),
-    updateAt: new Date()
-  })
+  //   mall: defaultMall,
+  //   // supplier: defaultSupplier,
+  //   price:{
+  //     openMarketPrice: 1000,
+  //     purchasePrice: 1000,
+  //     memberPrice: 1000
+  //   },
+  //   taxType: TaxType.TAXABLE,
+  //   createdAt: new Date(),
+  //   updateAt: new Date()
+  // })
 
   return {
     defaultUser,

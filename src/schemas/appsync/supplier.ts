@@ -15,8 +15,8 @@ export class Supplier {
     @Field(type => Mall)
     @Column()
     mall: Mall;
-    @RelationColumn()
-    mallId: number;
+    // @RelationColumn()
+    // mallId: number;
 
     @Field()
     @Column()
