@@ -4,17 +4,13 @@ import { ApolloServer } from "apollo-server";
 import { Container } from "typedi";
 import * as TypeORM from "typeorm";
 import * as TypeGraphQL from 'type-graphql'
+import { seedDatabase } from "./helpers";
+import { connection } from "./connection";
 import { RecipeResolver } from "./resolvers/recipe.resolver";
 import { RateResolver } from "./resolvers/rate.resolver";
-import { Recipe } from "./schemas/recipe";
-import { Rate } from "./schemas/rate";
-import { User } from "./schemas/user";
-import { seedDatabase } from "./helpers";
-import { MallResolver } from "./resolvers/appsync/mall.resolver";
-import { Mall } from "./schemas/appsync/mall";
 
 export interface Context {
-  user: User;
+  // user: User;
 }
 
 // register 3rd party IOC container
@@ -22,28 +18,15 @@ TypeORM.useContainer(Container);
 
 async function bootstrap() {
   try {
-    // create TypeORM connection
-    await TypeORM.createConnection({
-      type: "postgres",
-      database: "nbb",
-      username: "postgres", // fill this with your username
-      password: "jsi9200!", // and password
-      port: 5432,
-      host: "localhost",
-      entities: [Recipe, Rate, User],
-      synchronize: true,
-      // logger: "advanced-console",
-      logging: false
-      // dropSchema: true,
-      // cache: true,
-    });
+
+    await TypeORM.createConnection(connection);
 
     // seed database with some data
     const { defaultUser } = await seedDatabase();
 
     // build TypeGraphQL executable schema
     const schema = await TypeGraphQL.buildSchema({
-      resolvers: [RecipeResolver, RateResolver, MallResolver],
+      resolvers: [RecipeResolver, RateResolver],
       container: Container,
       emitSchemaFile: {
         path: 'emit.graphql'
@@ -57,7 +40,7 @@ async function bootstrap() {
     // const server = new ApolloServer({ schema, context });
 
     // Without context
-    const server = new ApolloServer({ schema });
+    const server = new ApolloServer({ schema, context });
     // Start the server
     const { url } = await server.listen(4000);
     console.log(`Server is running, GraphQL Playground available at ${url}`);

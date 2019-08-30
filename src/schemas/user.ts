@@ -1,5 +1,7 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from "typeorm";
+import { Recipe } from "./recipe";
+import { Lazy } from "../helpers";
 
 @ObjectType()
 @Entity()
@@ -18,4 +20,8 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToMany(type => Recipe, recipe => recipe.author, { lazy: true, cascade: ["insert", "update"] })
+  @Field(type => [Recipe])
+  recipes: Lazy<Recipe[]>;
 }

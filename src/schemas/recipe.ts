@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "ty
 
 import { Rate } from "./rate";
 import { User } from "./user";
-import { RelationColumn } from "../helpers";
+import { RelationColumn, Lazy } from "../helpers";
 
 @Entity()
 @ObjectType()
@@ -21,12 +21,12 @@ export class Recipe {
   description?: string;
 
   @Field(type => [Rate])
-  @OneToMany(type => Rate, rate => rate.recipe, { cascade: ["insert"] })
-  ratings: Rate[];
+  @OneToMany(type => Rate, rate => rate.recipe, { lazy: true, cascade: ["insert", "update"] })
+  ratings: Lazy<Rate[]>;
 
   @Field(type => User)
-  @ManyToOne(type => User)
-  author: User;
-  @RelationColumn()
-  authorId: number;
+  @ManyToOne(type => User, { lazy: true, cascade: ["insert", "update"] })
+  author: Lazy<User>;
+  // @RelationColumn()
+  // authorId: number;
 }

@@ -33,7 +33,7 @@ export class RecipeResolver {
     ): Promise<Recipe> {
         const recipe = this.recipeRepository.create({
             ...RecipeInput,
-            authorId: user.id,
+            author: user,
         });
 
         return await this.recipeRepository.save(recipe);
@@ -52,8 +52,7 @@ export class RecipeResolver {
             value: rateInput.value,
             user,
         });
-
-        recipe.ratings.push(newRate);
+        (await recipe.ratings).push(newRate);
 
         await this.recipeRepository.save(recipe);
 
@@ -68,9 +67,9 @@ export class RecipeResolver {
         });
     }
 
-    @FieldResolver()
-    async author(@Root() recipe: Recipe): Promise<User> {
-        return (await this.userRepository.findOne(recipe.authorId, { cache: 1000 }))!;
-    }
+    // @FieldResolver()
+    // async author(@Root() recipe: Recipe): Promise<User> {
+    //     return (await this.userRepository.findOne(recipe.author.id, { cache: 1000 }))!;
+    // }
 
 }

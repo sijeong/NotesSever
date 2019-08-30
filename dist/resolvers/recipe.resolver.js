@@ -42,7 +42,7 @@ let RecipeResolver = class RecipeResolver {
     }
     addRecipe(RecipeInput, { user }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const recipe = this.recipeRepository.create(Object.assign({}, RecipeInput, { authorId: user.id }));
+            const recipe = this.recipeRepository.create(Object.assign({}, RecipeInput, { author: user }));
             return yield this.recipeRepository.save(recipe);
         });
     }
@@ -57,7 +57,7 @@ let RecipeResolver = class RecipeResolver {
                 value: rateInput.value,
                 user,
             });
-            recipe.ratings.push(newRate);
+            (yield recipe.ratings).push(newRate);
             yield this.recipeRepository.save(recipe);
             return recipe;
         });
@@ -66,11 +66,6 @@ let RecipeResolver = class RecipeResolver {
         return this.ratingsRepository.find({
             cache: 1000,
             where: { recipeId: recipe.id }
-        });
-    }
-    author(recipe) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return (yield this.userRepository.findOne(recipe.authorId, { cache: 1000 }));
         });
     }
 };
@@ -109,13 +104,6 @@ __decorate([
     __metadata("design:paramtypes", [recipe_1.Recipe]),
     __metadata("design:returntype", void 0)
 ], RecipeResolver.prototype, "ratings", null);
-__decorate([
-    type_graphql_1.FieldResolver(),
-    __param(0, type_graphql_1.Root()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [recipe_1.Recipe]),
-    __metadata("design:returntype", Promise)
-], RecipeResolver.prototype, "author", null);
 RecipeResolver = __decorate([
     type_graphql_1.Resolver(of => recipe_1.Recipe),
     __param(0, typeorm_typedi_extensions_1.InjectRepository(user_1.User)),

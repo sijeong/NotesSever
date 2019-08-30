@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
+const recipe_1 = require("./recipe");
 let User = class User {
 };
 __decorate([
@@ -32,6 +33,11 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    typeorm_1.OneToMany(type => recipe_1.Recipe, recipe => recipe.author, { lazy: true, cascade: ["insert", "update"] }),
+    type_graphql_1.Field(type => [recipe_1.Recipe]),
+    __metadata("design:type", Object)
+], User.prototype, "recipes", void 0);
 User = __decorate([
     type_graphql_1.ObjectType(),
     typeorm_1.Entity()

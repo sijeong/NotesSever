@@ -31,7 +31,7 @@ let RateResolver = class RateResolver {
     }
     user(rate) {
         return __awaiter(this, void 0, void 0, function* () {
-            return (yield this.userRepository.findOne(rate.userId, { cache: 1000 }));
+            return (yield this.userRepository.findOne((yield rate.user).id, { cache: 1000 }));
         });
     }
 };

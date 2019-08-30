@@ -30,29 +30,28 @@ function seedDatabase() {
             password: "s3cr3tp4ssw0rd",
         });
         yield userRepository.save(defaultUser);
-        const recipes = recipeRepository.create([
+        const [recipe1, recipe2] = recipeRepository.create([
             {
                 title: "Recipe 1",
                 description: "Desc 1",
                 author: defaultUser,
-                ratings: ratingsRepository.create([
-                    { value: 2, user: defaultUser },
-                    { value: 4, user: defaultUser },
-                    { value: 5, user: defaultUser },
-                    { value: 3, user: defaultUser },
-                    { value: 4, user: defaultUser },
-                ]),
             },
             {
                 title: "Recipe 2",
                 author: defaultUser,
-                ratings: ratingsRepository.create([
-                    { value: 2, user: defaultUser },
-                    { value: 4, user: defaultUser },
-                ]),
             },
         ]);
-        yield recipeRepository.save(recipes);
+        yield recipeRepository.save([recipe1, recipe2]);
+        const ratings = ratingsRepository.create([
+            { value: 2, user: defaultUser, recipe: recipe1 },
+            { value: 4, user: defaultUser, recipe: recipe1 },
+            { value: 5, user: defaultUser, recipe: recipe1 },
+            { value: 3, user: defaultUser, recipe: recipe1 },
+            { value: 4, user: defaultUser, recipe: recipe1 },
+            { value: 2, user: defaultUser, recipe: recipe2 },
+            { value: 4, user: defaultUser, recipe: recipe2 },
+        ]);
+        yield ratingsRepository.save(ratings);
         // const defaultMall = mallRepository.create({
         //   mallName: "Our First Mall",
         //   createdAt: new Date(),

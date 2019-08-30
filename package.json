@@ -14,7 +14,7 @@
     "graphql": "^14.4.2",
     "pg": "^7.12.1",
     "reflect-metadata": "^0.1.13",
-    "schema-ts": "git+https://github.com/sijeong/schema-typescript.git",
+    "schema-ts": "file:../schema-ts",
     "type-graphql": "^0.17.4",
     "typedi": "^0.8.0",
     "typeorm": "^0.2.18",

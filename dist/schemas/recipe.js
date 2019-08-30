@@ -13,7 +13,6 @@ const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const rate_1 = require("./rate");
 const user_1 = require("./user");
-const helpers_1 = require("../helpers");
 let Recipe = class Recipe {
 };
 __decorate([
@@ -33,18 +32,14 @@ __decorate([
 ], Recipe.prototype, "description", void 0);
 __decorate([
     type_graphql_1.Field(type => [rate_1.Rate]),
-    typeorm_1.OneToMany(type => rate_1.Rate, rate => rate.recipe, { cascade: ["insert"] }),
-    __metadata("design:type", Array)
+    typeorm_1.OneToMany(type => rate_1.Rate, rate => rate.recipe, { lazy: true, cascade: ["insert", "update"] }),
+    __metadata("design:type", Object)
 ], Recipe.prototype, "ratings", void 0);
 __decorate([
     type_graphql_1.Field(type => user_1.User),
-    typeorm_1.ManyToOne(type => user_1.User),
-    __metadata("design:type", user_1.User)
+    typeorm_1.ManyToOne(type => user_1.User, { lazy: true, cascade: ["insert", "update"] }),
+    __metadata("design:type", Object)
 ], Recipe.prototype, "author", void 0);
-__decorate([
-    helpers_1.RelationColumn(),
-    __metadata("design:type", Number)
-], Recipe.prototype, "authorId", void 0);
 Recipe = __decorate([
     typeorm_1.Entity(),
     type_graphql_1.ObjectType()

@@ -3,7 +3,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } f
 
 import { User } from "./user";
 import { Recipe } from "./recipe";
-import { RelationColumn } from "../helpers";
+import { RelationColumn, Lazy } from "../helpers";
 
 @Entity()
 @ObjectType()
@@ -16,17 +16,17 @@ export class Rate {
   value: number;
 
   @Field(type => User)
-  @ManyToOne(type => User)
-  user: User;
-  @RelationColumn()
-  userId: number;
+  @ManyToOne(type => User, { lazy: true })
+  user: Lazy<User>;
+  // @RelationColumn()
+  // userId: number;
 
   @Field()
   @CreateDateColumn()
   date: Date;
 
-  @ManyToOne(type => Recipe)
-  recipe: Recipe;
-  @RelationColumn()
-  recipeId: number;
+  @ManyToOne(type => Recipe, { lazy: true })
+  recipe: Lazy<Recipe>;
+  // @RelationColumn()
+  // recipeId: number;
 }

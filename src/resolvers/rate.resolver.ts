@@ -11,6 +11,7 @@ export class RateResolver {
 
   @FieldResolver()
   async user(@Root() rate: Rate): Promise<User> {
-    return (await this.userRepository.findOne(rate.userId, { cache: 1000 }))!;
+    
+    return (await this.userRepository.findOne((await rate.user).id, { cache: 1000 }))!;
   }
 }
