@@ -8,14 +8,22 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type DResult {
+  affected: Float!
+}
+
 type Mutation {
   addRecipe(recipe: RecipeInput!): Recipe!
   rate(rate: RateInput!): Recipe!
+  addTodo(todo: TodoInput!): Todo!
+  removeTodo(todoId: Int!): DResult
 }
 
 type Query {
   recipe(recipeId: Int!): Recipe
   recipes: [Recipe!]!
+  todos: [Todo!]!
+  todo(todoId: Int!): Todo
 }
 
 type Rate {
@@ -40,6 +48,17 @@ type Recipe {
 input RecipeInput {
   title: String!
   description: String
+}
+
+type Todo {
+  id: ID!
+  text: String!
+  completed: Boolean!
+}
+
+input TodoInput {
+  text: String!
+  completed: Boolean
 }
 
 type User {

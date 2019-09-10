@@ -12,7 +12,7 @@ export class Recipe {
   @PrimaryGeneratedColumn()
   readonly id: number;
 
-  @Field()
+  @Field({})
   @Column()
   title: string;
 

@@ -21,7 +21,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Recipe.prototype, "id", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    type_graphql_1.Field({}),
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], Recipe.prototype, "title", void 0);
