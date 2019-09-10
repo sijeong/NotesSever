@@ -33,6 +33,9 @@ export class TodoResolver {
         return await this.todoRepository.save(todo);
     }
 
+
+    // Is that possible to use union type???
+    
     @Mutation(returns => DResult, { nullable: true })
     async removeTodo(
         @Arg("todoId", type => Int) todoId: number
@@ -42,6 +45,12 @@ export class TodoResolver {
         return await result;
     }
 
+    @Mutation(returns => DResult, { nullable: true })
+    async removeTodos(
+        @Arg("ids", type => [Int]) ids: number []
+    ): Promise<DeleteResult>{
+        return this.todoRepository.delete(ids);
+    }
     async _addTodo() {
         await getConnection()
             .createQueryBuilder()
