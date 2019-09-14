@@ -1,21 +1,19 @@
 {
     "compilerOptions": {
-        "target": "es2016",
+        "target": "es2017",
         "module": "commonjs",
-        // "lib": [
-        //     "dom",
-        //     "es2016",
-        //     "esnext.asynciterable"
-        // ],
-        // "moduleResolution": "node",
+        "lib": [
+            "es2017"
+        ],
         "esModuleInterop": true,
-        "strict": true,
+        // "strict": true,
         "strictPropertyInitialization": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "outDir": "dist"
-    },
-    "include": [
-        "./src/**/*"
-    ]
+        "outDir": "dist",
+        "rootDir": "src"
+    }
+    // "include": [
+    //     "./src/**/*"
+    // ]
 }

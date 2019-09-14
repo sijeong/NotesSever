@@ -1,31 +1,31 @@
 import { getRepository, Column, ColumnOptions } from "typeorm";
 
-import { Recipe } from "./schemas/recipe";
+import { Recipe } from "./schemas/recipe.entities";
 import { Rate } from "./schemas/rate";
 import { User } from "./schemas/user";
 
-import { } from 'schema-ts';
-import { Todo } from "./schemas/todo";
+
+import { Todo } from "./schemas/todo.entities";
 // import { Mall } from "./schemas/appsync/mall";
 // import { Supplier } from "./schemas/appsync/supplier";
 // import { Product } from "./schemas/appsync/product";
 // import { TaxType } from "./schemas/appsync/taxType.enum";
 
 export async function seedDatabase() {
-  const recipeRepository = getRepository(Recipe);
-  const ratingsRepository = getRepository(Rate);
-  const userRepository = getRepository(User);
+  // const recipeRepository = getRepository(Recipe);
+  // const ratingsRepository = getRepository(Rate);
+  // const userRepository = getRepository(User);
   const todoRepository = getRepository(Todo);
   // const mallRepository = getRepository(Mall);
   // const supplierRepository = getRepository(Supplier);
   // const productRepository = getRepository(Product);
 
-  const defaultUser = userRepository.create({
-    email: "test@github.com",
-    nickname: "19majkel94",
-    password: "s3cr3tp4ssw0rd",
-  });
-  await userRepository.save(defaultUser);
+  // const defaultUser = userRepository.create({
+  //   email: "test@github.com",
+  //   nickname: "19majkel94",
+  //   password: "s3cr3tp4ssw0rd",
+  // });
+  // await userRepository.save(defaultUser);
 
   const todos = todoRepository.create([
     {
@@ -40,32 +40,32 @@ export async function seedDatabase() {
 
   await todoRepository.save(todos);
 
-  const [recipe1, recipe2] = recipeRepository.create([
-    {
-      title: "Recipe 1",
-      description: "Desc 1",
-      author: defaultUser,
-    },
-    {
-      title: "Recipe 2",
-      author: defaultUser,
-    },
-  ]);
+  // const [recipe1, recipe2] = recipeRepository.create([
+  //   {
+  //     title: "Recipe 1",
+  //     description: "Desc 1",
+  //     author: defaultUser,
+  //   },
+  //   {
+  //     title: "Recipe 2",
+  //     author: defaultUser,
+  //   },
+  // ]);
 
-  await recipeRepository.save([recipe1, recipe2]);
+  // await recipeRepository.save([recipe1, recipe2]);
 
-  const ratings = ratingsRepository.create([
-    { value: 2, user: defaultUser, recipe: recipe1 },
-    { value: 4, user: defaultUser, recipe: recipe1 },
-    { value: 5, user: defaultUser, recipe: recipe1 },
-    { value: 3, user: defaultUser, recipe: recipe1 },
-    { value: 4, user: defaultUser, recipe: recipe1 },
+  // const ratings = ratingsRepository.create([
+  //   { value: 2, user: defaultUser, recipe: recipe1 },
+  //   { value: 4, user: defaultUser, recipe: recipe1 },
+  //   { value: 5, user: defaultUser, recipe: recipe1 },
+  //   { value: 3, user: defaultUser, recipe: recipe1 },
+  //   { value: 4, user: defaultUser, recipe: recipe1 },
 
-    { value: 2, user: defaultUser, recipe: recipe2 },
-    { value: 4, user: defaultUser, recipe: recipe2 },
-  ]);
+  //   { value: 2, user: defaultUser, recipe: recipe2 },
+  //   { value: 4, user: defaultUser, recipe: recipe2 },
+  // ]);
   
-  await ratingsRepository.save(ratings);
+  // await ratingsRepository.save(ratings);
   // const defaultMall = mallRepository.create({
   //   mallName: "Our First Mall",
   //   createdAt: new Date(),
@@ -92,9 +92,9 @@ export async function seedDatabase() {
   //   updateAt: new Date()
   // })
 
-  return {
-    defaultUser,
-  };
+  // return {
+  //   defaultUser,
+  // };
 }
 
 export function RelationColumn(options?: ColumnOptions) {

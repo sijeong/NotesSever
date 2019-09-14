@@ -1,8 +1,8 @@
 import { Arg, Args, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
-import { Repository, getConnection, DeleteResult } from 'typeorm';
+import { DeleteResult, getConnection, Repository } from 'typeorm';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 
-import { Todo } from '../schemas/todo';
+import { Todo } from '../schemas/todo.entities';
 import { TodoInput } from './types/todo.input';
 import { DResult } from './types/todo.output';
 
@@ -12,7 +12,7 @@ export class TodoResolver {
         @InjectRepository(Todo) private readonly todoRepository: Repository<Todo>
     ) { }
 
-    @Query(returns => [Todo])
+    @Query(returns => [Todo], { nullable: true })
     todos(): Promise<Todo[]> {
         return this.todoRepository.find();
     }
@@ -34,21 +34,22 @@ export class TodoResolver {
     }
 
 
+
     // Is that possible to use union type???
-    
+
     @Mutation(returns => DResult, { nullable: true })
     async removeTodo(
         @Arg("todoId", type => Int) todoId: number
     ): Promise<DeleteResult> {
-        
+
         const result = this.todoRepository.delete(todoId)
         return await result;
     }
 
     @Mutation(returns => DResult, { nullable: true })
     async removeTodos(
-        @Arg("ids", type => [Int]) ids: number []
-    ): Promise<DeleteResult>{
+        @Arg("ids", type => [Int]) ids: number[]
+    ): Promise<DeleteResult> {
         return this.todoRepository.delete(ids);
     }
     async _addTodo() {

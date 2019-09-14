@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const user_1 = require("./user");
-const recipe_1 = require("./recipe");
+const recipe_entities_1 = require("./recipe.entities");
 let Rate = class Rate {
 };
 __decorate([
@@ -35,7 +35,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Rate.prototype, "date", void 0);
 __decorate([
-    typeorm_1.ManyToOne(type => recipe_1.Recipe, { lazy: true }),
+    typeorm_1.ManyToOne(type => recipe_entities_1.Recipe, { lazy: true }),
     __metadata("design:type", Object)
 ], Rate.prototype, "recipe", void 0);
 Rate = __decorate([

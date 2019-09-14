@@ -1,5 +1,5 @@
-import { Product, Review, Price } from 'schema-ts'
-
+// import { Product, Review, Price } from 'schema-ts'
+import { Product } from '../schemas/appsync/product'
 import { Resolver, Query, Arg, Mutation, FieldResolver, Root } from 'type-graphql'
 import { products, reviews, prices, ProductData, ReviewData, PriceData } from '../data'
 import { InjectRepository } from 'typeorm-typedi-extensions';

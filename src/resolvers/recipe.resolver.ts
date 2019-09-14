@@ -1,12 +1,13 @@
-import { Resolver, Arg, Int, Query, Mutation, Ctx, FieldResolver, Root } from "type-graphql";
-import { Recipe } from "../schemas/recipe";
-import { InjectRepository } from "typeorm-typedi-extensions";
-import { User } from "../schemas/user";
-import { Repository } from "typeorm";
-import { Rate } from "../schemas/rate";
-import { RecipeInput } from "./types/recipe.input";
-import { Context } from "vm";
-import { RateInput } from "./types/rate.input";
+import { Arg, Ctx, FieldResolver, Int, Mutation, Query, Resolver, Root } from 'type-graphql';
+import { Repository } from 'typeorm';
+import { InjectRepository } from 'typeorm-typedi-extensions';
+import { Context } from 'vm';
+
+import { Rate } from '../schemas/rate';
+import { Recipe } from '../schemas/recipe.entities';
+import { User } from '../schemas/user';
+import { RateInput } from './types/rate.input';
+import { RecipeInput } from './types/recipe.input';
 
 @Resolver(of => Recipe)
 export class RecipeResolver {
@@ -41,18 +42,24 @@ export class RecipeResolver {
 
     @Mutation(returns => Recipe)
     async rate(@Arg("rate") rateInput: RateInput, @Ctx() { user }: Context): Promise<Recipe> {
+
         const recipe = await this.recipeRepository.findOne(rateInput.recipeId, { relations: ["ratings"] });
 
         if (!recipe) {
             throw new Error("Invalid recipe ID");
         }
 
-        const newRate = this.ratingsRepository.create({
-            recipe,
-            value: rateInput.value,
-            user,
-        });
-        (await recipe.ratings).push(newRate);
+        // const newRate = this.ratingsRepository.create({
+        //     recipe,
+        //     value: rateInput.value,
+        //     user,
+        // });
+        (await recipe.ratings).push(
+            this.ratingsRepository.create({
+                recipe,
+                user,
+                value: rateInput.value
+            }));
 
         await this.recipeRepository.save(recipe);
 

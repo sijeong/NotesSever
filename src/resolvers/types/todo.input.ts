@@ -1,5 +1,6 @@
-import { Todo } from "../../schemas/todo";
+import { Todo } from "../../schemas/todo.entities";
 import { InputType, Field } from "type-graphql";
+import { Recipe } from "../../schemas/recipe.entities";
 
 @InputType()
 export class TodoInput implements Partial<Todo>{
@@ -7,5 +8,6 @@ export class TodoInput implements Partial<Todo>{
     text: string;
 
     @Field({ nullable: true })
-    completed: boolean
+    completed?: boolean
 }
+

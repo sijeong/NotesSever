@@ -1,11 +1,13 @@
-import { Mall } from "./mall";
-import { Product } from "./product";
-import { Member } from "./member";
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { ObjectType, Field } from "type-graphql";
-import { RelationColumn } from "../../helpers";
-import { AWSURL } from "../../scalars/AWSURL";
-import { AWSDateTime } from "schema-ts";
+import { Field, ObjectType } from 'type-graphql';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+import { AWSDateTime } from '../../scalars/AWSDateTime';
+import { AWSURL } from '../../scalars/AWSURL';
+import { Mall } from './mall';
+import { Member } from './member';
+import { Product } from './product';
+
+// import { AWSDateTime } from "schema-ts";
 
 @Entity()
 @ObjectType()

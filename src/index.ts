@@ -1,6 +1,6 @@
 import "reflect-metadata";
 
-import { ApolloServer } from "apollo-server";
+// import { ApolloServer } from "apollo-server";
 import { Container } from "typedi";
 import * as TypeORM from "typeorm";
 import * as TypeGraphQL from 'type-graphql'
@@ -9,6 +9,7 @@ import { connection } from "./connection";
 import { RecipeResolver } from "./resolvers/recipe.resolver";
 import { RateResolver } from "./resolvers/rate.resolver";
 import { TodoResolver } from "./resolvers/todo.resolver";
+import { ApolloServer } from "apollo-server-koa";
 
 export interface Context {
   // user: User;
@@ -23,7 +24,7 @@ async function bootstrap() {
     await TypeORM.createConnection(connection);
 
     // seed database with some data
-    const { defaultUser } = await seedDatabase();
+    // const { defaultUser } = await seedDatabase();
 
     // build TypeGraphQL executable schema
     const schema = await TypeGraphQL.buildSchema({
@@ -37,17 +38,20 @@ async function bootstrap() {
     // create mocked context
     const context: Context = { user: defaultUser };
 
+    const server = new ApolloServer({
+      schema
+    })
     // Create GraphQL server
     // const server = new ApolloServer({ schema, context });
 
     // Without context
-    const server = new ApolloServer({ schema, context });
-    // Start the server
-    const { url } = await server.listen(4000);
-    console.log(`Server is running, GraphQL Playground available at ${url}`);
-  } catch (err) {
-    console.error(err);
+    //   const server = new ApolloServer({ schema, context });
+    //   Start the server
+    //   const { url } = await server.listen(4000);
+    //   console.log(`Server is running, GraphQL Playground available at ${url}`);
+    // } catch (err) {
+    //   console.error(err);
+    // }
   }
+  finally { }
 }
-
-bootstrap();

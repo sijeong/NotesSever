@@ -1,5 +1,5 @@
 import { registerEnumType } from 'type-graphql'
-import { Product } from 'schema-ts';
+
 
 export enum ProductType{
     TypeOne,

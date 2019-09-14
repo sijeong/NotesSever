@@ -1,9 +1,9 @@
-import { Resolver, FieldResolver, Root } from "type-graphql";
-import { Repository } from "typeorm";
-import { InjectRepository } from "typeorm-typedi-extensions";
+import { FieldResolver, Resolver, Root } from 'type-graphql';
+import { Repository } from 'typeorm';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 
-import { Rate } from "../schemas/rate";
-import { User } from "../schemas/user";
+import { Rate } from '../schemas/rate';
+import { User } from '../schemas/user';
 
 @Resolver(of => Rate)
 export class RateResolver {

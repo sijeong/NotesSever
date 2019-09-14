@@ -1,5 +1,5 @@
 import { Mall } from "./mall";
-import { AWSDateTime } from "schema-ts";
+
 
 export class Faq{
     faqId: number;

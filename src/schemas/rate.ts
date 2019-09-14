@@ -2,7 +2,7 @@ import { ObjectType, Field, Int } from "type-graphql";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 
 import { User } from "./user";
-import { Recipe } from "./recipe";
+import { Recipe } from "./recipe.entities";
 import { RelationColumn, Lazy } from "../helpers";
 
 @Entity()

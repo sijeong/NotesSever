@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const AWSPhone_1 = require("../../scalars/AWSPhone");
-const schema_ts_1 = require("schema-ts");
+const AWSEmail_1 = require("../../scalars/AWSEmail");
 let SupplierStaff = class SupplierStaff {
 };
 __decorate([
@@ -26,7 +26,7 @@ __decorate([
     __metadata("design:type", String)
 ], SupplierStaff.prototype, "phone", void 0);
 __decorate([
-    type_graphql_1.Field(type => schema_ts_1.AWSEmail),
+    type_graphql_1.Field(type => AWSEmail_1.AWSEmail),
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], SupplierStaff.prototype, "email", void 0);

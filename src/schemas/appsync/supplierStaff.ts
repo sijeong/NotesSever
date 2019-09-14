@@ -1,7 +1,7 @@
 import { ObjectType, Field } from "type-graphql";
 import { Entity, Column } from "typeorm";
 import { AWSPhone } from "../../scalars/AWSPhone";
-import { AWSEmail } from "schema-ts";
+import { AWSEmail } from "../../scalars/AWSEmail";
 
 @Entity()
 @ObjectType()

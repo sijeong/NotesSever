@@ -1,8 +1,8 @@
 import { ConnectionOptions } from 'typeorm';
-import { Recipe } from './schemas/recipe';
+import { Recipe } from './schemas/recipe.entities';
 import { User } from './schemas/user';
 import { Rate } from './schemas/rate';
-import { Todo } from './schemas/todo';
+import { Todo } from './schemas/todo.entities';
 
 export const connection: ConnectionOptions = {
     type: "postgres",

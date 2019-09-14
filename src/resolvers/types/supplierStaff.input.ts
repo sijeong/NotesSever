@@ -1,7 +1,7 @@
 import { SupplierStaff } from "../../schemas/appsync/supplierStaff";
 import { InputType, Field } from "type-graphql";
 import { AWSPhone } from "../../scalars/AWSPhone";
-import { AWSEmail } from "schema-ts";
+import { AWSEmail } from "../../scalars/AWSEmail";
 
 @InputType()
 export class StaffInput implements Partial<SupplierStaff>{

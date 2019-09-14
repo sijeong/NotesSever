@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const recipe_1 = require("./schemas/recipe");
+const recipe_entities_1 = require("./schemas/recipe.entities");
 const user_1 = require("./schemas/user");
 const rate_1 = require("./schemas/rate");
-const todo_1 = require("./schemas/todo");
+const todo_entities_1 = require("./schemas/todo.entities");
 exports.connection = {
     type: "postgres",
     database: "nbb",
@@ -11,7 +11,7 @@ exports.connection = {
     password: "jsi9200!",
     port: 5432,
     host: "localhost",
-    entities: [recipe_1.Recipe, user_1.User, rate_1.Rate, todo_1.Todo],
+    entities: [recipe_entities_1.Recipe, user_1.User, rate_1.Rate, todo_entities_1.Todo],
     synchronize: true,
     logger: "advanced-console",
     logging: "all",
