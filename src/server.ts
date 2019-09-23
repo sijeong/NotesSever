@@ -1,13 +1,15 @@
 import { ApolloServer } from 'apollo-server-koa';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import Router, {} from 'koa-router';
+import mount from 'koa-mount';
+import Router from 'koa-router';
+import serve from 'koa-static';
 import Container from 'typedi';
 import { useContainer } from 'typeorm';
 
 import { schema } from './app/app';
+import defaultController from './app/default.controller';
 import graphqlController, { resolvers, typeDefs } from './app/graphql.controller';
-import defaultController  from './app/default.controller'
 import databaseConnection from './database/database.connection';
 import { seedDatabase } from './helpers';
 
@@ -31,7 +33,7 @@ databaseConnection.then(
                     maxFiles: 5
                 }
             });
-            
+
             const app: Koa = new Koa();
             app.use(async (ctx: Koa.Context, next: () => Promise<any>) => {
                 try {
@@ -53,7 +55,9 @@ databaseConnection.then(
 
             app.use(graphqlController.routes());
             app.use(graphqlController.allowedMethods());
-            
+
+            app.use(serve('./uploads'));
+            app.use(mount('/uploads', app))
             
             app.on('error', console.error)
 

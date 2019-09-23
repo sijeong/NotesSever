@@ -12,16 +12,25 @@ type DResult {
   affected: Float!
 }
 
+type File {
+  id: ID!
+  path: String!
+  filename: String!
+  minetype: String!
+}
+
 type Mutation {
   addTodo(todo: TodoInput!): Todo!
   updateTodo(todo: TodoInput!): UResult
   removeTodo(todoId: ID!): DResult
   removeTodos(ids: [ID!]!): DResult
+  uploadFile(file: Upload!): File!
 }
 
 type Query {
   todos: [Todo!]
   todo(todoId: ID!): Todo
+  uploads: [File!]
 }
 
 type Todo {
@@ -37,6 +46,9 @@ input TodoInput {
   text: String!
   completed: Boolean
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type UResult {
   affected: Float!

@@ -5,6 +5,7 @@ import { ConnectionOptions, Connection, createConnection, useContainer } from 't
 import { TodoResolver } from '../resolvers/todo.resolver';
 import { Todo } from '../schemas/todo.entities';
 import Container from 'typedi';
+import { File } from '../schemas/File';
 
 const parentDir = join(__dirname, '..');
 useContainer(Container);
@@ -17,7 +18,8 @@ const connectionOpts: ConnectionOptions = {
     database: process.env.DB_NAME || 'nbb',
     entities: [
         // `${parentDir}/**/*.entity.ts`,
-        Todo
+        Todo,
+        File
     ],
     dropSchema: true,
     synchronize: true,

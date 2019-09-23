@@ -13,8 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/koa-mount": "^4.0.0",
+    "@types/koa-static": "^4.0.1",
     "@types/mkdirp": "^0.5.2",
     "@types/shortid": "0.0.29",
+    "graphql-upload": "^8.0.7",
+    "koa-mount": "^4.0.0",
+    "koa-static": "^5.0.0",
     "mkdirp": "^0.5.1",
     "promises-all": "^1.0.0",
     "shortid": "^2.2.15"

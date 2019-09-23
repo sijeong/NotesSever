@@ -7,9 +7,10 @@ import { buildSchema } from 'type-graphql';
 import { TodoResolver } from '../resolvers/todo.resolver';
 import graphqlController, { resolvers, typeDefs } from './graphql.controller';
 import Container from 'typedi';
+import { FileResolver } from '../resolvers/file.resolver';
 
 export const schema: Promise<GraphQLSchema> = buildSchema({
-    resolvers: [TodoResolver],
+    resolvers: [TodoResolver, FileResolver],
     container: Container,
     emitSchemaFile: {
         path: 'emited.graphql'
