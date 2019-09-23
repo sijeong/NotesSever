@@ -12,18 +12,18 @@ require("reflect-metadata");
 const typedi_1 = require("typedi");
 const TypeORM = __importStar(require("typeorm"));
 const TypeGraphQL = __importStar(require("type-graphql"));
-const helpers_1 = require("./helpers");
 const connection_1 = require("./connection");
 const recipe_resolver_1 = require("./resolvers/recipe.resolver");
 const rate_resolver_1 = require("./resolvers/rate.resolver");
 const todo_resolver_1 = require("./resolvers/todo.resolver");
+const apollo_server_koa_1 = require("apollo-server-koa");
 // register 3rd party IOC container
 TypeORM.useContainer(typedi_1.Container);
 async function bootstrap() {
     try {
         await TypeORM.createConnection(connection_1.connection);
         // seed database with some data
-        const { defaultUser } = await helpers_1.seedDatabase();
+        // const { defaultUser } = await seedDatabase();
         // build TypeGraphQL executable schema
         const schema = await TypeGraphQL.buildSchema({
             resolvers: [recipe_resolver_1.RecipeResolver, rate_resolver_1.RateResolver, todo_resolver_1.TodoResolver],
@@ -33,7 +33,10 @@ async function bootstrap() {
             }
         });
         // create mocked context
-        const context = { user: defaultUser };
+        // const context: Context = { user: defaultUser };
+        const server = new apollo_server_koa_1.ApolloServer({
+            schema
+        });
         // Create GraphQL server
         // const server = new ApolloServer({ schema, context });
         // Without context

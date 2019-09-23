@@ -1,10 +1,10 @@
-import { Arg, Args, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
-import { DeleteResult, getConnection, Repository } from 'typeorm';
+import { Arg, Args, Ctx, Int, Mutation, Query, Resolver, ID } from 'type-graphql';
+import { DeleteResult, getConnection, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 
 import { Todo } from '../schemas/todo.entities';
 import { TodoInput } from './types/todo.input';
-import { DResult } from './types/todo.output';
+import { DResult, UResult } from './types/todo.output';
 
 @Resolver(of => Todo)
 export class TodoResolver {
@@ -18,7 +18,7 @@ export class TodoResolver {
     }
 
     @Query(returns => Todo, { nullable: true })
-    todo(@Arg("todoId", type => Int) todoId: number) {
+    todo(@Arg("todoId", type => ID) todoId: string) {
         return this.todoRepository.findOne(todoId);
     }
 
@@ -34,21 +34,25 @@ export class TodoResolver {
     }
 
 
+    @Mutation(returns => UResult, { nullable: true })
+    async updateTodo(
+        @Arg("todo") todo: TodoInput
+    ): Promise<UpdateResult> {
+        return this.todoRepository.update(todo.id, todo)
+    }
 
     // Is that possible to use union type???
 
     @Mutation(returns => DResult, { nullable: true })
     async removeTodo(
-        @Arg("todoId", type => Int) todoId: number
+        @Arg("todoId", type => ID) todoId: string
     ): Promise<DeleteResult> {
-
-        const result = this.todoRepository.delete(todoId)
-        return await result;
+        return await this.todoRepository.delete(todoId)
     }
 
     @Mutation(returns => DResult, { nullable: true })
     async removeTodos(
-        @Arg("ids", type => [Int]) ids: number[]
+        @Arg("ids", type => [ID]) ids: string[]
     ): Promise<DeleteResult> {
         return this.todoRepository.delete(ids);
     }

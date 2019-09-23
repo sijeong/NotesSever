@@ -36,7 +36,7 @@ async function bootstrap() {
     });
 
     // create mocked context
-    const context: Context = { user: defaultUser };
+    // const context: Context = { user: defaultUser };
 
     const server = new ApolloServer({
       schema

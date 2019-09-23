@@ -3,28 +3,41 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
 type DResult {
   affected: Float!
 }
 
 type Mutation {
   addTodo(todo: TodoInput!): Todo!
-  removeTodo(todoId: Int!): DResult
-  removeTodos(ids: [Int!]!): DResult
+  updateTodo(todo: TodoInput!): UResult
+  removeTodo(todoId: ID!): DResult
+  removeTodos(ids: [ID!]!): DResult
 }
 
 type Query {
   todos: [Todo!]
-  todo(todoId: Int!): Todo
+  todo(todoId: ID!): Todo
 }
 
 type Todo {
   id: ID!
+  category: String!
   text: String!
   completed: Boolean!
+  completedDate: DateTime!
 }
 
 input TodoInput {
+  id: String
   text: String!
   completed: Boolean
+}
+
+type UResult {
+  affected: Float!
 }

@@ -13,7 +13,7 @@ const connectionOpts: ConnectionOptions = {
     host: process.env.DB_HOST || 'localhost',
     port: Number(process.env.DB_PORT) || 5432,
     username: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'jsi9200!',
+    password: process.env.DB_PASSWORD || 'qwerasdf',
     database: process.env.DB_NAME || 'nbb',
     entities: [
         // `${parentDir}/**/*.entity.ts`,
