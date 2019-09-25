@@ -20,5 +20,4 @@ export class File {
     @Column()
     minetype: string;
 
-    
 }

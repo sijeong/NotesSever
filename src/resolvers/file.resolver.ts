@@ -13,38 +13,38 @@ import { FileInput } from './types/file.input';
 const UPLOAD_DIR = './uploads';
 mkdirp.sync(UPLOAD_DIR)
 
-const storeFS = ({ stream, filename }) => {
-    const id = shortid.generate();
-    const path = `${UPLOAD_DIR}/${id}-${filename}`;
+// const storeFS = ({ stream, filename }) => {
+//     const id = shortid.generate();
+//     const path = `${UPLOAD_DIR}/${id}-${filename}`;
 
-    return new Promise<{ id, path }>((resolve, reject) =>
-        stream
-            .on('error', error => {
-                if (stream.truncated)
-                    fs.unlinkSync(path)
-                reject(error)
-            })
-            .pipe(fs.createWriteStream(path))
-            .on('error', error => reject(error))
-            .on('finish', () => resolve({ id, path }))
-    )
-}
+//     return new Promise<{ id, path }>((resolve, reject) =>
+//         stream
+//             .on('error', error => {
+//                 if (stream.truncated)
+//                     fs.unlinkSync(path)
+//                 reject(error)
+//             })
+//             .pipe(fs.createWriteStream(path))
+//             .on('error', error => reject(error))
+//             .on('finish', () => resolve({ id, path }))
+//     )
+// }
 
-const processUpload = async upload => {
-    const { createReadStream, filename, minetype } = await upload
-    const stream = createReadStream()
-    const { id, path } = await storeFS({ stream, filename })
+// const processUpload = async upload => {
+//     const { createReadStream, filename, minetype } = await upload
+//     const stream = createReadStream()
+//     const { id, path } = await storeFS({ stream, filename })
 
-    console.log({ id, filename, minetype, })
-}
+//     console.log({ id, filename, minetype, })
+// }
 
 
-const exercise = () => {
-    const one = new Promise<string>((resolve, reject) => {
+// const exercise = () => {
+//     const one = new Promise<string>((resolve, reject) => {
 
-    })
+//     })
 
-}
+// }
 
 
 @Resolver(of => File)
@@ -77,20 +77,22 @@ export class FileResolver {
         const { createReadStream, filename } = await file;
         const id = shortid.generate();
         const path = `${UPLOAD_DIR}/${id}-${filename}`;
-        const url:string = await new Promise((res, rej) =>
+        const url:string = await new Promise((resolve, reject) =>
             createReadStream()
                 .pipe(createWriteStream(path))
-                .on('error', rej)
+                .on('error', reject)
                 .on('finish', () => {
-                    unlink(path, () => {
-                        res('your image url...')
-                    })
+                    // unlink(path, () => {
+                    //     resolve(path)
+                    // })
+                    resolve(path);
                 })
         )
         // const { id, path } = await storeFS({ stream, filename })
 
         const obj = this.fileRepository.create({
-            ...file,
+            minetype: file.mimetype,
+            filename: file.filename,
             path: url
         })
 
